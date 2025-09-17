@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+artifacts/
+*.pt
+*.lime
+build/
+cmake-build-*/
+libtorch/
+.DS_Store
+Thumbs.db

@@ -9,3 +9,6 @@ cmake-build-*/
 libtorch/
 .DS_Store
 Thumbs.db
+
+# large datasets
+!data/.gitkeep

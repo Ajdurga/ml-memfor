@@ -12,3 +12,6 @@ Thumbs.db
 
 # large datasets
 !data/.gitkeep
+
+# ignore datasets
+/data/

@@ -26,10 +26,10 @@ N=len(full); sizes=[int(0.8*N), int(0.1*N)]; sizes.append(N-sum(sizes))
 g = torch.Generator().manual_seed(SEED)
 train_ds, val_ds, test_ds = random_split(full, sizes, generator=g)
 
-BATCH=128
-train_loader = DataLoader(train_ds, batch_size=BATCH, shuffle=True, num_workers=2)
-val_loader = DataLoader(val_ds, batch_size=BATCH, shuffle=False, num_workers=2)
-test_loader = DataLoader(test_ds, batch_size=BATCH, shuffle=False, num_workers=2)
+BATCH=64
+train_loader = DataLoader(train_ds, batch_size=BATCH, shuffle=True, num_workers=0)
+val_loader = DataLoader(val_ds, batch_size=BATCH, shuffle=False, num_workers=0)
+test_loader = DataLoader(test_ds, batch_size=BATCH, shuffle=False, num_workers=0)
 
 device = torch.device("cpu")
 model = SimpleCNN().to(device)
@@ -45,12 +45,12 @@ def run(loader, train=False):
         out = model(x)
         loss = crit(out,y)
         if train: loss.backward(); opt.step()
-        loss_sum += float(loss)*x.size(0)
+        loss_sum += loss.item() * x.size(0)
         pred = out.argmax(1); correct += int((pred==y).sum()); total += x.size(0)
     return loss_sum/total, correct/total
 
 best_acc=0.0
-EPOCHS=10
+EPOCHS=3
 for ep in trange(EPOCHS, desc="epochs"):
     tr_loss,tr_acc = run(train_loader, train=True)
     va_loss,va_acc = run(val_loader, train=False)

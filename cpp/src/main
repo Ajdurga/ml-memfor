@@ -34,24 +34,3 @@ int main() {
   std::cout << std::hex << "input data_ptr: 0x" << (uint64_t)input.data_ptr() << std::dec << "\n";
   return 0;
 }
-int main() {
-std::cout << "PID=" << getpid() << std::endl;
-  torch::jit::script::Module module = torch::jit::load("../artifacts/scripted_model.pt");
-  module.eval();
- 
-  const int N = 8;
-  auto input = torch::randint(0, 256, {N, 3, 32, 32}, torch::kByte);
-  input = normalize(input).to(torch::kFloat32);
- 
-  // --- set a GDB breakpoint on this next line later ---
-  auto out = module.forward({input}).toTensor();
- 
-  auto pred = std::get<1>(out.max(1));
-  std::cout << "out shape: " << out.sizes() << "\n";
-  std::cout << "pred[0]: " << pred[0].item<int>() << "\n";
-  std::cout << std::hex << "input data_ptr: 0x" << (uint64_t)input.data_ptr() << std::dec << "\n";
-  return 0;
-  std::cout << "pred[0]: " << pred[0].item<int>() << "\n";
-std::cout << std::hex << "input data_ptr: 0x" << (uint64_t)input.data_ptr() << std::dec << "\n";
-return 0;
-}

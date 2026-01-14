@@ -18,3 +18,13 @@ Thumbs.db
 
 # ignore datasets
 /data/
+build/
+cpp/build/
+*.o
+*.so
+cifar_infer
+artifacts/*.lime
+artifacts/*.tar.gz
+libtorch/
+__pycache__/
+*.pyc

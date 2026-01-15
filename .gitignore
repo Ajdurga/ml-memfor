@@ -28,3 +28,14 @@ artifacts/*.tar.gz
 libtorch/
 __pycache__/
 *.pyc
+build/
+cpp/build/
+*.o
+*.so
+artifacts/*.pt
+artifacts/*.bin
+artifacts/*.lime
+artifacts/*.tar.gz
+artifacts/*.zip
+__pycache__/
+*.pyc
